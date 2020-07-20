@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{{ asset('assets/admin/') }}/plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -93,29 +95,29 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item ">
+            <router-link to="/" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
-            </a>
+            </router-link>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+          <li class="nav-item ">
+            <router-link to="/category-list" class="nav-link ">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Categories
               </p>
-            </a>
+            </router-link>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview " >
+            <router-link to="/post-list" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Posts
               </p>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -137,9 +139,11 @@
     <!-- Content Header (Page header) -->
 
     <!-- /.content-header -->
-    <admin-master></admin-master>
-    <!-- Main content -->
 
+    <!-- Main content -->
+      <div class="container-fluid">
+         <admin-master></admin-master>
+      </div>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -160,6 +164,5 @@
 <!-- ./wrapper -->
 <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
 </body>
 </html>

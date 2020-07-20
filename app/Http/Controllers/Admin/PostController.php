@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 class PostController extends Controller
 {
     /**
@@ -15,7 +16,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+
+        $posts = Post::with('user','category')->get();
+
+        return response()->json([
+            'posts' => $posts
+        ],200);
     }
 
     /**
@@ -36,7 +42,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'category_id'=>'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        //image upload using vue
+        $strpos = strpos($request->image,';'); //position of semicolon
+        $sub = substr($request->image,0,$strpos); //string before semicolon
+        $extension = explode('/',$sub)[1];
+        $imageName = $request->title.time().".".$extension;
+        $image =Image::make($request->image)->resize(370,320);
+        $uploadPath = public_path()."/storage/posts/";
+        $image->save($uploadPath.$imageName);
+
+        $post = new Post();
+        $post->category_id = $request->category_id;
+        $post->user_id = Auth::user()->id;
+        $post->comment_id = 0;
+        $post->title = $request->title;
+        $post->image = $imageName;
+        $post->description=$request->description;
+
+        $post->save();
     }
 
     /**
@@ -58,7 +87,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return response()->json([
+            'post' => $post
+        ],200);
     }
 
     /**
@@ -70,7 +101,40 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate($request,[
+            'category_id'=>'required',
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        //image upload using vue
+        if($request->image!=$post->image){
+
+        $strpos = strpos($request->image,';'); //position of semicolon
+        $sub = substr($request->image,0,$strpos); //string before semicolon
+        $extension = explode('/',$sub)[1];
+        $imageName = $request->title.time().".".$extension;
+        $image =Image::make($request->image)->resize(370,320);
+        $uploadPath = public_path()."/storage/posts/";
+        $oldImage = $uploadPath. $post->image;
+        if (file_exists($oldImage)) {
+            @unlink($oldImage);
+        }
+        $image->save($uploadPath.$imageName);
+
+        }
+        else {
+            $imageName =$post->image;
+        }
+
+        $post->category_id = $request->category_id;
+        $post->user_id = Auth::user()->id;
+        $post->comment_id = 0;
+        $post->title = $request->title;
+        $post->image = $imageName;
+        $post->description=$request->description;
+
+        $post->save();
     }
 
     /**
@@ -81,6 +145,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $uploadPath = public_path() . "/storage/posts/";
+        $image =$uploadPath.$post->image;
+        if (file_exists($image)) {
+            @unlink( $image);
+        }
+        $post->delete();
     }
 }
