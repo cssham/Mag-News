@@ -231,13 +231,13 @@ body {
 }
 
 a {
-  color: #0088cc;
+  color: #17B978;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #005580;
+  color: #068351;
   text-decoration: underline;
 }
 
@@ -3194,13 +3194,13 @@ button.close {
   *margin-left: .3em;
   font-size: 14px;
   line-height: 20px;
-  color: #333333;
+  color: #f1eded;
   text-align: center;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
   cursor: pointer;
-  background-color: #f5f5f5;
-  *background-color: #e6e6e6;
+  background-color: #17a86e;
+  *background-color: #299b75;
   background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
   background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);

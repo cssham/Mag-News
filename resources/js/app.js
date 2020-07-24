@@ -45,7 +45,7 @@ const Toast = Swal.mixin({
 window.Toast = Toast;
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin-master', require('./components/admin/MasterComponent.vue').default);
-
+Vue.component('frontend-master', require('./components/frontend/MasterComponent.vue').default);
 
 import {routes} from './routes';
 const router = new VueRouter({

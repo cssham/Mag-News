@@ -53,7 +53,7 @@ class PostController extends Controller
         $sub = substr($request->image,0,$strpos); //string before semicolon
         $extension = explode('/',$sub)[1];
         $imageName = $request->title.time().".".$extension;
-        $image =Image::make($request->image)->resize(370,320);
+        $image =Image::make($request->image)->resize(870,350);
         $uploadPath = public_path()."/storage/posts/";
         $image->save($uploadPath.$imageName);
 
@@ -114,7 +114,7 @@ class PostController extends Controller
         $sub = substr($request->image,0,$strpos); //string before semicolon
         $extension = explode('/',$sub)[1];
         $imageName = $request->title.time().".".$extension;
-        $image =Image::make($request->image)->resize(370,320);
+        $image =Image::make($request->image)->resize(870,350);
         $uploadPath = public_path()."/storage/posts/";
         $oldImage = $uploadPath. $post->image;
         if (file_exists($oldImage)) {

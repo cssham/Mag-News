@@ -9,9 +9,15 @@ import category_edit from './components/admin/category/Edit.vue';
 import post_list from './components/admin/post/List.vue';
 import post_new from './components/admin/post/New.vue';
 import post_edit from './components/admin/post/Edit.vue';
+
+//frontend components
+import frontend_home from './components/frontend/HomeComponent.vue';
+import all_news from './components/frontend/news/all_news.vue';
+import single_news from './components/frontend/news/single_news.vue';
+
 export const routes = [
     {
-        path:'/',
+        path:'/home',
         component:admin_home
     },
      {
@@ -37,5 +43,18 @@ export const routes = [
     {
         path: '/post-edit/:id',
         component: post_edit
-    }
+    },
+    //frontend routes
+    {
+        path: '/',
+        component: all_news
+    },
+    {
+        path: '/news/single/:id',
+        component: single_news
+    },
+    {
+        path: '/categories/news/:id',
+        component: all_news
+    },
 ]
